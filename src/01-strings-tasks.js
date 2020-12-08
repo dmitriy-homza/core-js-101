@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* *******************************************************************************************
  *                                                                                           *
  * Plese read the following tutorial before implementing tasks:                              *
@@ -236,8 +237,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  const str = typeof value !== 'object' || value === null ? value : value.slice();
+  return typeof str === 'string';
 }
 
 /**
@@ -264,8 +266,25 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const table = {
+    A: 0,
+    J: 10,
+    Q: 11,
+    K: 12,
+    '♣': 0,
+    '♦': 13,
+    '♥': 26,
+    '♠': 39,
+  };
+  const arr = value.split('');
+  let cardId = 0;
+  const firstNumber = arr.length > 2 ? +`${arr[0]}${arr[1]}` - 1 : +arr[0] - 1;
+  cardId = (typeof table[arr[0]] === 'number'
+      ? table[arr[0]]
+      : firstNumber)
+      + (arr.length > 2 ? table[arr[2]] : table[arr[1]]);
+  return cardId;
 }
 
 module.exports = {
