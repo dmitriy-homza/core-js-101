@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* ********************************************************************************************
  *                                                                                            *
  * Plese read the following tutorial before implementing tasks:                               *
@@ -342,8 +343,28 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const numbers = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  return arr.sort((a, b) => {
+    if (numbers[a] > numbers[b]) {
+      return 1;
+    }
+    if (numbers[a] < numbers[b]) {
+      return -1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -589,8 +610,8 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((previousArr, item) => previousArr[item], arr);
 }
 
 
@@ -612,8 +633,19 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  // eslint-disable-next-line array-callback-return
+  return arr.map((item, index) => {
+    if (index < arr.length / 2 && arr.length > 1 && index !== arr.length / 2 - 0.5) {
+    // eslint-disable-next-line no-param-reassign
+      const num = arr[Math.ceil(arr.length / 2) + index];
+      const num2 = item;
+      // eslint-disable-next-line no-param-reassign
+      arr[Math.ceil(arr.length / 2) + index] = num2;
+      return num;
+    }
+    return item;
+  });
 }
 
 
