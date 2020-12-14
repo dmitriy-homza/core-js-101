@@ -320,8 +320,9 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const result = `${num}`.split('').reduce((cum, item) => +cum + +item);
+  return result >= 10 ? getDigitalRoot(result) : result;
 }
 
 
@@ -385,8 +386,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -402,8 +403,17 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  return pathes.reduce((accum, item) => {
+    let coomon = '';
+    for (let i = 0; i < item.length; i += 1) {
+      if (accum[i] && accum[i] === item[i]) {
+        coomon += accum[i];
+      } else break;
+    }
+    coomon = coomon.slice(0, coomon.lastIndexOf('/') + 1);
+    return coomon;
+  });
 }
 
 
